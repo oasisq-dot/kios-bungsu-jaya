@@ -1,237 +1,137 @@
-// script.js - JavaScript for Kios Bungsu Jaya
+// Variabel global untuk menyimpan data pesanan
+let selectedProduct = {};
+let selectedPaymentMethod = "";
 
-// DOM Elements
-const productsContainer = document.getElementById("products-container");
-const orderModal = document.getElementById("orderModal");
-const successModal = document.getElementById("successModal");
-const closeButtons = document.querySelectorAll(
-  ".close, .close-modal, .close-success"
-);
-const orderForm = document.getElementById("orderForm");
-const quantityInput = document.getElementById("quantity");
+// Event listener untuk tombol beli
+document.querySelectorAll(".btn-buy").forEach((button) => {
+  button.addEventListener("click", function () {
+    const productName = this.getAttribute("data-product");
+    const productPrice = parseInt(this.getAttribute("data-price"));
 
-// Product data
-let currentProduct = {
-  id: null,
-  name: "",
-  price: 0,
-};
+    selectedProduct = {
+      name: productName,
+      price: productPrice,
+    };
 
-// Load products on page load
-document.addEventListener("DOMContentLoaded", function () {
-  // Set minimum delivery date to tomorrow
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  document.getElementById("delivery_date").min = tomorrow
-    .toISOString()
-    .split("T")[0];
-  document.getElementById("delivery_date").value = tomorrow
-    .toISOString()
-    .split("T")[0];
+    // Isi form dengan data produk
+    document.getElementById("productName").value = productName;
+    document.getElementById("productPrice").value = formatRupiah(productPrice);
+    document.getElementById("quantity").value = 1;
+    document.getElementById("totalPrice").value = formatRupiah(productPrice);
 
-  // Load products
-  loadProducts();
+    // Reset form
+    document.getElementById("customerName").value = "";
+    document.getElementById("customerPhone").value = "";
+    document.getElementById("customerAddress").value = "";
 
-  // Event listeners for modals
-  closeButtons.forEach((button) => {
-    button.addEventListener("click", closeAllModals);
+    // Reset pilihan pembayaran
+    document.querySelectorAll(".payment-method").forEach((method) => {
+      method.classList.remove("selected");
+    });
+    selectedPaymentMethod = "";
+
+    // Tampilkan modal
+    document.getElementById("orderModal").style.display = "block";
   });
-
-  // Close modal when clicking outside
-  window.addEventListener("click", (e) => {
-    if (e.target === orderModal || e.target === successModal) {
-      closeAllModals();
-    }
-  });
-
-  // Quantity change listener
-  quantityInput.addEventListener("input", updateOrderSummary);
 });
 
-// Load products from server
-async function loadProducts() {
-  try {
-    const response = await fetch("products.php");
-    const data = await response.json();
+// Event listener untuk tombol tutup modal
+document.querySelector(".close-modal").addEventListener("click", function () {
+  document.getElementById("orderModal").style.display = "none";
+});
 
-    if (data.success && data.products.length > 0) {
-      displayProducts(data.products);
-    } else {
-      productsContainer.innerHTML =
-        '<div class="error">Tidak ada produk tersedia</div>';
-    }
-  } catch (error) {
-    productsContainer.innerHTML =
-      '<div class="error">Gagal memuat produk</div>';
-    console.error("Error loading products:", error);
-  }
-}
+// Event listener untuk perubahan jumlah pesanan
+document.getElementById("quantity").addEventListener("input", function () {
+  const quantity = parseInt(this.value) || 0;
+  const totalPrice = selectedProduct.price * quantity;
+  document.getElementById("totalPrice").value = formatRupiah(totalPrice);
+});
 
-// Display products in grid
-function displayProducts(products) {
-  productsContainer.innerHTML = "";
-
-  products.forEach((product) => {
-    const productCard = document.createElement("div");
-    productCard.className = "product-card";
-
-    productCard.innerHTML = `
-            <div class="product-image">
-                <img src="${product.image_url}" alt="${product.name}" 
-                     onerror="this.src='https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
-            </div>
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <p class="product-desc">${product.description}</p>
-                <div class="product-price">Rp ${formatRupiah(
-                  product.price
-                )}<span>/liter</span></div>
-                <p class="product-stock">Stok: ${product.stock} liter</p>
-                <button class="btn-buy" 
-                        data-id="${product.id}"
-                        data-name="${product.name}"
-                        data-price="${product.price}">
-                    <i class="fas fa-shopping-cart"></i> Beli Sekarang
-                </button>
-            </div>
-        `;
-
-    productsContainer.appendChild(productCard);
-  });
-
-  // Add event listeners to buy buttons
-  document.querySelectorAll(".btn-buy").forEach((button) => {
-    button.addEventListener("click", function () {
-      openOrderModal(
-        this.getAttribute("data-id"),
-        this.getAttribute("data-name"),
-        parseInt(this.getAttribute("data-price"))
-      );
+// Event listener untuk pilihan metode pembayaran
+document.querySelectorAll(".payment-method").forEach((method) => {
+  method.addEventListener("click", function () {
+    document.querySelectorAll(".payment-method").forEach((m) => {
+      m.classList.remove("selected");
     });
+    this.classList.add("selected");
+    selectedPaymentMethod = this.getAttribute("data-method");
   });
-}
+});
 
-// Open order modal
-function openOrderModal(id, name, price) {
-  currentProduct = { id, name, price };
+// Event listener untuk tombol lanjutkan pembayaran
+document.getElementById("btnPayment").addEventListener("click", function () {
+  // Validasi form
+  const customerName = document.getElementById("customerName").value.trim();
+  const customerPhone = document.getElementById("customerPhone").value.trim();
+  const customerAddress = document
+    .getElementById("customerAddress")
+    .value.trim();
+  const quantity = parseInt(document.getElementById("quantity").value) || 0;
 
-  // Set modal values
-  document.getElementById("modal-product-id").value = id;
-  document.getElementById("modal-product-name").value = name;
-  document.getElementById("modal-product-price").value = price;
+  if (!customerName) {
+    alert("Mohon isi nama pembeli");
+    return;
+  }
 
-  // Update summary
-  updateOrderSummary();
+  if (!customerPhone) {
+    alert("Mohon isi nomor WhatsApp");
+    return;
+  }
 
-  // Show modal
-  orderModal.style.display = "block";
-  document.body.style.overflow = "hidden";
-}
+  if (!customerAddress) {
+    alert("Mohon isi alamat lengkap");
+    return;
+  }
 
-// Update order summary
-function updateOrderSummary() {
-  const quantity = parseInt(quantityInput.value) || 1;
-  const total = currentProduct.price * quantity;
+  if (quantity < 1) {
+    alert("Mohon isi jumlah pesanan yang valid");
+    return;
+  }
 
-  // Update display
-  document.getElementById("summary-product").textContent = currentProduct.name;
-  document.getElementById("summary-quantity").textContent = `${quantity} liter`;
-  document.getElementById("summary-total").textContent = `Rp ${formatRupiah(
-    total
-  )}`;
-  document.getElementById("price-per-unit").textContent = `Rp ${formatRupiah(
-    currentProduct.price
-  )}`;
-}
+  if (!selectedPaymentMethod) {
+    alert("Mohon pilih metode pembayaran");
+    return;
+  }
 
-// Format Rupiah
+  // Jika pembayaran melalui DANA, arahkan ke aplikasi DANA
+  if (selectedPaymentMethod === "dana") {
+    // Simulasi pengalihan ke aplikasi DANA
+    alert(
+      "Anda akan diarahkan ke aplikasi DANA untuk melakukan pembayaran ke nomor 085774988295"
+    );
+
+    // Simulasi pembayaran berhasil
+    setTimeout(function () {
+      document.getElementById("orderModal").style.display = "none";
+      document.getElementById("thankYouModal").style.display = "block";
+    }, 2000);
+  } else {
+    // Untuk COD, langsung tampilkan terima kasih
+    document.getElementById("orderModal").style.display = "none";
+    document.getElementById("thankYouModal").style.display = "block";
+  }
+});
+
+// Event listener untuk tombol tutup modal terima kasih
+document.getElementById("closeThankYou").addEventListener("click", function () {
+  document.getElementById("thankYouModal").style.display = "none";
+});
+
+// Fungsi untuk format Rupiah
 function formatRupiah(amount) {
-  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return "Rp " + amount.toLocaleString("id-ID");
 }
 
-// Close all modals
-function closeAllModals() {
-  orderModal.style.display = "none";
-  successModal.style.display = "none";
-  document.body.style.overflow = "auto";
-}
+// Tutup modal jika klik di luar konten modal
+window.addEventListener("click", function (event) {
+  const orderModal = document.getElementById("orderModal");
+  const thankYouModal = document.getElementById("thankYouModal");
 
-// Handle form submission
-orderForm.addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  // Get form data
-  const formData = {
-    product_id: currentProduct.id,
-    product_name: currentProduct.name,
-    product_price: currentProduct.price,
-    quantity: parseInt(document.getElementById("quantity").value),
-    customer_name: document.getElementById("customer_name").value,
-    whatsapp: document.getElementById("whatsapp").value,
-    address: document.getElementById("address").value,
-    delivery_date: document.getElementById("delivery_date").value,
-    payment_method: document.querySelector(
-      'input[name="payment_method"]:checked'
-    ).value,
-  };
-
-  // Validate
-  if (formData.quantity < 1) {
-    alert("Jumlah minimal 1 liter");
-    return;
+  if (event.target === orderModal) {
+    orderModal.style.display = "none";
   }
 
-  if (!formData.whatsapp.match(/^[0-9]{10,15}$/)) {
-    alert("Nomor WhatsApp tidak valid");
-    return;
-  }
-
-  // Show loading
-  const submitBtn = orderForm.querySelector('button[type="submit"]');
-  const originalText = submitBtn.innerHTML;
-  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
-  submitBtn.disabled = true;
-
-  try {
-    // Send to server
-    const response = await fetch("process_order.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      // Show success modal
-      document.getElementById("success-order-number").textContent =
-        result.order_number;
-      document.getElementById(
-        "success-total"
-      ).textContent = `Rp ${result.total_price}`;
-
-      orderModal.style.display = "none";
-      successModal.style.display = "block";
-
-      // Open WhatsApp
-      setTimeout(() => {
-        if (result.whatsapp_url) {
-          window.open(result.whatsapp_url, "_blank");
-        }
-      }, 2000);
-
-      // Reset form
-      orderForm.reset();
-    } else {
-      alert(`Error: ${result.message}`);
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Terjadi kesalahan jaringan. Coba lagi.");
-  } finally {
-    submitBtn.innerHTML = originalText;
-    submitBtn.disabled = false;
+  if (event.target === thankYouModal) {
+    thankYouModal.style.display = "none";
   }
 });

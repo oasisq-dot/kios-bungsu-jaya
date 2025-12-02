@@ -1,242 +1,445 @@
 <!DOCTYPE html>
 <html lang="id">
   <head>
-    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KIOS BUNGSU JAYA - Beras Berkualitas</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>KIOS BUNGSU JAYA - Jual Beras Berkualitas</title>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <!-- Header -->
-    <header>
-      <div class="header-top">
-        <div class="container">
-          <div class="logo">
-            <h1><i class="fas fa-store"></i> KIOS BUNGSU JAYA</h1>
-            <p>Beras Berkualitas, Harga Terjangkau</p>
-          </div>
-          <div class="contact-info">
-            <p><i class="fas fa-phone"></i> 0857-7498-8295</p>
-            <p><i class="fas fa-clock"></i> Buka: 06:00 - 22:00</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero">
-        <div class="container">
-          <h2>Selamat Datang di Kios Bungsu Jaya</h2>
-          <p>Temukan beras berkualitas terbaik untuk keluarga Anda</p>
-          <a href="#products" class="btn-hero">Lihat Produk</a>
-        </div>
+    <!-- Header dengan Background -->
+    <header class="header">
+      <img
+        src="d:\xampp\htdocs\kios-bungsu-jaya\beras\toko.jpg"
+        alt="Background toko"
+        class="header-bg"
+      />
+      <div class="header-content">
+        <h1>KIOS BUNGSU JAYA</h1>
+        <p>
+          Selamat berbelanja di toko kami, kami menyediakan berbagai jenis beras
+          berkualitas untuk kebutuhan Anda.
+        </p>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container">
-      <!-- Welcome Section -->
-      <section class="welcome-section">
-        <h2><i class="fas fa-shopping-cart"></i> Selamat Berbelanja!</h2>
-        <p>
-          Kami menyediakan berbagai jenis beras berkualitas dengan harga
-          terjangkau
-        </p>
-      </section>
+    <!-- Konten Utama -->
+    <div class="container">
+      <h2 class="section-title">PRODUK KAMI</h2>
 
-      <!-- Products Section -->
-      <section id="products" class="products-section">
-        <h2 class="section-title">
-          <i class="fas fa-shopping-basket"></i> Produk Kami
-        </h2>
+      <!-- Video Produk Beras Premium -->
+      <div class="video-container">
+        <h3>kami selalu menyediakan prodk produk berkualitas</h3>
+        <video width="600" controls="">
+          <source
+            src="d:\xampp\htdocs\kios-bungsu-jaya\beras\vid.toko.mp4"
+            type="video/mp4"
+          />
+          Browser Anda tidak mendukung pemutaran video.
+        </video>
+      </div>
 
-        <div class="products-grid" id="products-container">
-          <!-- Products will be loaded from database -->
-          <div class="loading">
-            <i class="fas fa-spinner fa-spin"></i> Memuat produk...
+      <!-- Daftar Produk -->
+      <div class="products">
+        <!-- Produk 1: Beras Premium -->
+        <div class="product-card">
+          <img
+            src="d:\xampp\htdocs\kios-bungsu-jaya\beras\sania.jpg"
+            alt="Beras Premium"
+            class="product-image"
+          />
+          <div class="product-info">
+            <h3 class="product-name">Beras Premium</h3>
+            <p class="product-price">Rp 14.000/Liter</p>
+            <p class="product-description">
+              Beras berkualitas tinggi dengan butiran yang panjang dan pulen.
+              Cocok untuk nasi sehari-hari.
+            </p>
+            <button
+              class="btn-buy"
+              data-product="Beras Premium"
+              data-price="14000"
+            >
+              Beli Sekarang
+            </button>
           </div>
         </div>
-      </section>
-    </main>
 
-    <!-- Order Modal -->
+        <!-- Produk 2: Beras Lele -->
+        <div class="product-card">
+          <img
+            src="d:\xampp\htdocs\kios-bungsu-jaya\beras\beras lele.jpg"
+            alt="Beras Lele"
+            class="product-image"
+          />
+          <div class="product-info">
+            <h3 class="product-name">Beras Lele</h3>
+            <p class="product-price">Rp 13.000/Liter</p>
+            <p class="product-description">
+              Beras dengan tekstur yang lembut dan aroma yang khas. Cocok untuk
+              berbagai masakan.
+            </p>
+            <button
+              class="btn-buy"
+              data-product="Beras Lele"
+              data-price="13000"
+            >
+              Beli Sekarang
+            </button>
+          </div>
+        </div>
+
+        <!-- Produk 3: Beras Sakura -->
+        <div class="product-card">
+          <img
+            src="d:\xampp\htdocs\kios-bungsu-jaya\beras\sakura.jpg"
+            alt="Beras Sakura"
+            class="product-image"
+          />
+          <div class="product-info">
+            <h3 class="product-name">Beras Sakura</h3>
+            <p class="product-price">Rp 12.500/Liter</p>
+            <p class="product-description">
+              Beras dengan kualitas terbaik dari Jepang, menghasilkan nasi yang
+              pulen dan harum.
+            </p>
+            <button
+              class="btn-buy"
+              data-product="Beras Sakura"
+              data-price="12500"
+            >
+              Beli Sekarang
+            </button>
+          </div>
+        </div>
+
+        <!-- Produk 4: Beras Jempol OK -->
+        <div class="product-card">
+          <img
+            src="d:\xampp\htdocs\kios-bungsu-jaya\beras\jempol.jpg"
+            alt="Beras Jempol OK"
+            class="product-image"
+          />
+          <div class="product-info">
+            <h3 class="product-name">Beras Jempol OK</h3>
+            <p class="product-price">Rp 11.500/Liter</p>
+            <p class="product-description">
+              Beras dengan harga terjangkau namun tetap berkualitas untuk
+              keluarga Indonesia.
+            </p>
+            <button
+              class="btn-buy"
+              data-product="Beras Jempol OK"
+              data-price="11500"
+            >
+              Beli Sekarang
+            </button>
+          </div>
+        </div>
+
+        <!-- Produk 5: Ketan Putih -->
+        <div class="product-card">
+          <img
+            src="d:\xampp\htdocs\kios-bungsu-jaya\beras\ketan putih.jpg"
+            alt="Ketan Putih"
+            class="product-image"
+          />
+          <div class="product-info">
+            <h3 class="product-name">Ketan Putih</h3>
+            <p class="product-price">Rp 12.000/Liter</p>
+            <p class="product-description">
+              Ketan putih berkualitas untuk membuat berbagai kue tradisional dan
+              makanan khas.
+            </p>
+            <button
+              class="btn-buy"
+              data-product="Ketan Putih"
+              data-price="12000"
+            >
+              Beli Sekarang
+            </button>
+          </div>
+        </div>
+
+        <!-- Produk 6: Ketan Hitam -->
+        <div class="product-card">
+          <img
+            src="d:\xampp\htdocs\kios-bungsu-jaya\beras\ketan hitam.jpg"
+            alt="Ketan Hitam"
+            class="product-image"
+          />
+          <div class="product-info">
+            <h3 class="product-name">Ketan Hitam</h3>
+            <p class="product-price">Rp 15.000/Liter</p>
+            <p class="product-description">
+              Ketan hitam organik dengan kandungan gizi tinggi, cocok untuk
+              bubur dan dessert.
+            </p>
+            <button
+              class="btn-buy"
+              data-product="Ketan Hitam"
+              data-price="15000"
+            >
+              Beli Sekarang
+            </button>
+          </div>
+        </div>
+
+        <!-- Produk 7: Beras Merah -->
+        <div class="product-card">
+          <img
+            src="d:\xampp\htdocs\kios-bungsu-jaya\beras\beras merah.jpg"
+            alt="Beras Merah"
+            class="product-image"
+          />
+          <div class="product-info">
+            <h3 class="product-name">Beras Merah</h3>
+            <p class="product-price">Rp 16.000/Liter</p>
+            <p class="product-description">
+              Beras merah organik dengan kandungan serat tinggi, baik untuk
+              kesehatan.
+            </p>
+            <button
+              class="btn-buy"
+              data-product="Beras Merah"
+              data-price="16000"
+            >
+              Beli Sekarang
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Pemesanan -->
     <div id="orderModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h3><i class="fas fa-shopping-bag"></i> Form Pemesanan</h3>
-          <span class="close">&times;</span>
+          <h3 class="modal-title">Form Pemesanan</h3>
+          <button class="close-modal">×</button>
         </div>
         <div class="modal-body">
-          <form id="orderForm">
-            <input type="hidden" id="modal-product-id" />
-            <input type="hidden" id="modal-product-name" />
-            <input type="hidden" id="modal-product-price" />
-
-            <div class="form-group">
-              <label for="quantity">Jumlah (Liter):</label>
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="1"
-                max="100"
-                value="1"
-                required
-              />
-              <small
-                >Harga per liter: <span id="price-per-unit">Rp 0</span></small
-              >
-            </div>
-
-            <div class="form-group">
-              <label for="customer_name">Nama Lengkap:</label>
-              <input
-                type="text"
-                id="customer_name"
-                name="customer_name"
-                placeholder="Masukkan nama lengkap"
-                required
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="whatsapp">No. WhatsApp:</label>
-              <input
-                type="tel"
-                id="whatsapp"
-                name="whatsapp"
-                placeholder="081234567890"
-                required
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="address">Alamat Lengkap:</label>
-              <textarea
-                id="address"
-                name="address"
-                rows="3"
-                placeholder="Masukkan alamat lengkap"
-                required
-              ></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="delivery_date">Tanggal Pengiriman:</label>
-              <input
-                type="date"
-                id="delivery_date"
-                name="delivery_date"
-                required
-              />
-            </div>
-
-            <div class="form-group">
-              <label>Metode Pembayaran:</label>
-              <div class="payment-options">
-                <label class="payment-option">
-                  <input
-                    type="radio"
-                    name="payment_method"
-                    value="cod"
-                    checked
-                  />
-                  <div class="option-content">
-                    <i class="fas fa-money-bill-wave"></i>
-                    <span>COD (Bayar di Tempat)</span>
-                  </div>
-                </label>
-                <label class="payment-option">
-                  <input type="radio" name="payment_method" value="dana" />
-                  <div class="option-content">
-                    <i class="fas fa-wallet"></i>
-                    <span>Dana</span>
-                  </div>
-                </label>
+          <div class="form-group">
+            <label class="form-label">Produk</label>
+            <input
+              type="text"
+              id="productName"
+              class="form-control"
+              readonly=""
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Harga per Liter</label>
+            <input
+              type="text"
+              id="productPrice"
+              class="form-control"
+              readonly=""
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Jumlah (Liter)</label>
+            <input
+              type="number"
+              id="quantity"
+              class="form-control"
+              min="1"
+              value="1"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total Harga</label>
+            <input
+              type="text"
+              id="totalPrice"
+              class="form-control"
+              readonly=""
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nama Pembeli</label>
+            <input
+              type="text"
+              id="customerName"
+              class="form-control"
+              placeholder="Masukkan nama lengkap"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">No WhatsApp</label>
+            <input
+              type="text"
+              id="customerPhone"
+              class="form-control"
+              placeholder="Contoh: 08123456789"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Alamat Lengkap</label>
+            <textarea
+              id="customerAddress"
+              class="form-control"
+              rows="3"
+              placeholder="Masukkan alamat lengkap pengiriman"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Metode Pembayaran</label>
+            <div class="payment-methods">
+              <div class="payment-method" data-method="cod">
+                <div class="payment-icon">💰</div>
+                <div>COD</div>
+              </div>
+              <div class="payment-method" data-method="dana">
+                <div class="payment-icon">💳</div>
+                <div>DANA</div>
               </div>
             </div>
-
-            <div class="order-summary">
-              <h4>Ringkasan Pesanan</h4>
-              <div class="summary-row">
-                <span>Produk:</span>
-                <span id="summary-product">-</span>
-              </div>
-              <div class="summary-row">
-                <span>Jumlah:</span>
-                <span id="summary-quantity">1 Liter</span>
-              </div>
-              <div class="summary-row total">
-                <span>Total Harga:</span>
-                <span id="summary-total">Rp 0</span>
-              </div>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" class="btn btn-secondary close-modal">
-                Batal
-              </button>
-              <button type="submit" class="btn btn-primary">
-                <i class="fas fa-check"></i> Konfirmasi Pesanan
-              </button>
-            </div>
-          </form>
+          </div>
+          <button id="btnPayment" class="btn-confirm">
+            Lanjutkan Pembayaran
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- Success Modal -->
-    <div id="successModal" class="modal">
-      <div class="modal-content success-modal">
-        <div class="success-icon">
-          <i class="fas fa-check-circle"></i>
-        </div>
-        <h3>Terima Kasih!</h3>
-        <p>Pesanan Anda telah berhasil diterima.</p>
-        <div class="order-details">
+    <!-- Modal Terima Kasih -->
+    <div id="thankYouModal" class="modal">
+      <div class="modal-content">
+        <div class="thank-you">
+          <h2>Terima Kasih!</h2>
           <p>
-            <strong>No. Pesanan:</strong>
-            <span id="success-order-number">TRX-001</span>
+            Pesanan Anda telah berhasil diterima. Kami akan segera memproses
+            pesanan Anda.
           </p>
-          <p><strong>Total:</strong> <span id="success-total">Rp 0</span></p>
-          <p>Kami akan menghubungi via WhatsApp untuk konfirmasi.</p>
+          <p>
+            Untuk pembayaran melalui DANA, silakan transfer ke nomor:
+            <strong>085774988295</strong>
+          </p>
+          <p>Konfirmasi pembayaran dapat dilakukan melalui WhatsApp kami.</p>
+          <button class="btn-confirm" id="closeThankYou">Tutup</button>
         </div>
-        <button class="btn btn-primary close-success">Tutup</button>
+      </div>
+    </div>
+    <!-- Modal Pemesanan -->
+    <div id="orderModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Form Pemesanan</h3>
+          <button class="close-modal">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Produk</label>
+            <input
+              type="text"
+              id="productName"
+              class="form-control"
+              readonly=""
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Harga per Liter</label>
+            <input
+              type="text"
+              id="productPrice"
+              class="form-control"
+              readonly=""
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Jumlah (Liter)</label>
+            <input
+              type="number"
+              id="quantity"
+              class="form-control"
+              min="1"
+              value="1"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total Harga</label>
+            <input
+              type="text"
+              id="totalPrice"
+              class="form-control"
+              readonly=""
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nama Pembeli</label>
+            <input
+              type="text"
+              id="customerName"
+              class="form-control"
+              placeholder="Masukkan nama lengkap"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">No WhatsApp</label>
+            <input
+              type="text"
+              id="customerPhone"
+              class="form-control"
+              placeholder="Contoh: 08123456789"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Alamat Lengkap</label>
+            <textarea
+              id="customerAddress"
+              class="form-control"
+              rows="3"
+              placeholder="Masukkan alamat lengkap pengiriman"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Metode Pembayaran</label>
+            <div class="payment-methods">
+              <div class="payment-method" data-method="cod">
+                <div class="payment-icon">💰</div>
+                <div>COD</div>
+              </div>
+              <div class="payment-method" data-method="dana">
+                <div class="payment-icon">💳</div>
+                <div>DANA</div>
+              </div>
+            </div>
+          </div>
+          <button id="btnPayment" class="btn-confirm">
+            Lanjutkan Pembayaran
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-section">
-            <h4><i class="fas fa-store"></i> KIOS BUNGSU JAYA</h4>
-            <p>Menyediakan beras berkualitas sejak 2010</p>
-          </div>
-          <div class="footer-section">
-            <h4>Kontak</h4>
-            <p><i class="fas fa-phone"></i> 0857-7498-8295</p>
-            <p><i class="fas fa-map-marker-alt"></i> Jl. Raya Beras No. 123</p>
-          </div>
-          <div class="footer-section">
-            <h4>Jam Buka</h4>
-            <p>Setiap Hari</p>
-            <p>06:00 - 22:00 WIB</p>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2024 KIOS BUNGSU JAYA. All rights reserved.</p>
+    <!-- Modal Terima Kasih -->
+    <div id="thankYouModal" class="modal">
+      <div class="modal-content">
+        <div class="thank-you">
+          <h2>Terima Kasih!</h2>
+          <p>
+            Pesanan Anda telah berhasil diterima. Kami akan segera memproses
+            pesanan Anda.
+          </p>
+          <p>
+            Untuk pembayaran melalui DANA, silakan transfer ke nomor:
+            <strong>085774988295</strong>
+          </p>
+          <p>Konfirmasi pembayaran dapat dilakukan melalui WhatsApp kami.</p>
+          <button class="btn-confirm" id="closeThankYou">Tutup</button>
         </div>
       </div>
-    </footer>
+    </div>
+    <!-- CTA -->
+    <section class="cta">
+      <h2>Ingin Pesan Beras Hari Ini?</h2>
+      <p>Kami siap antar ke rumah atau warung Anda dengan cepat!</p>
+      <a href="https://wa.me/+62 857-7599-8331" class="btn-primary"
+        >Hubungi via WhatsApp</a
+      >
+    </section>
 
-    <!-- JavaScript -->
     <script src="script.js"></script>
   </body>
 </html>
